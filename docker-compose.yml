@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  api:
+    build: ./Api/
+
+  web:
+    build: ./Web/
+
+  db:
+    build: ./Db/
+
+  nginx: 
+    build: ./Nginx/
+  
+netw
