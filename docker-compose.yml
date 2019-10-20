@@ -3,12 +3,14 @@ version: '3'
 services:
   api:
     build: ./Api/
+    environment:
+      - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
+      - ASPNETCORE_URLS=${API_URLS}
+  # web:
+  #   build: ./Web/
 
-  web:
-    build: ./Web/
+  # db:
+  #   build: ./Db/
 
-  db:
-    build: ./Db/
-
-  nginx: 
-    build: ./Nginx/
+  # nginx: 
+  #   build: ./Nginx/
