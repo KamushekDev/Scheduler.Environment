@@ -6,6 +6,10 @@ services:
     environment:
       - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
       - ASPNETCORE_URLS=${API_URLS}
+  web:
+    build: ./Web/
+    volumes:
+      - web-artifacts:/app/build
   # web:
   #   build: ./Web/
 
@@ -14,3 +18,5 @@ services:
 
   # nginx: 
   #   build: ./Nginx/
+volumes:
+  web-artifacts:
