@@ -10,8 +10,6 @@ services:
     build: ./Web/
     volumes:
       - web-artifacts:/app/build
-    depends_on:
-      - nginx
   # web:
   #   build: ./Web/
 
@@ -23,6 +21,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - web-artifacts:/usr/share/nginx/html
+      - web-artifacts:/usr/share/nginx/html:ro
+    depends_on:
+      - web
 volumes:
   web-artifacts:
