@@ -6,16 +6,24 @@ services:
     environment:
       - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
       - ASPNETCORE_URLS=${API_URLS}
+    ports:
+      - 81:8080
+      - 443:443
   web:
     build: ./Web/
     volumes:
       - web-artifacts:/app/build
+    # links:
+    #   - "api:${API_ALIAS}"
+    environment:
+      - API_ENDPOINT=${API_ALIAS}:${API_PORT}
+    depends_on:
+      - api
   # web:
   #   build: ./Web/
 
   # db:
   #   build: ./Db/
-
   nginx: 
     build: ./Nginx/
     ports:
