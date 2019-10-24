@@ -8,20 +8,14 @@ services:
       - ASPNETCORE_URLS=${API_URLS}
     ports:
       - 81:8080
-      - 443:443
   web:
     build: ./Web/
     volumes:
-      - web-artifacts:/app/build
-    # links:
-    #   - "api:${API_ALIAS}"
+      - web-artifacts:/app
     environment:
       - API_ENDPOINT=${API_ALIAS}:${API_PORT}
     depends_on:
       - api
-  # web:
-  #   build: ./Web/
-
   # db:
   #   build: ./Db/
   nginx: 
@@ -29,8 +23,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - web-artifacts:/usr/share/nginx/html:ro
+      - web-artifacts:/app
     depends_on:
       - web
 volumes:
-  web-artifacts:
+  web-artifacts: {}
