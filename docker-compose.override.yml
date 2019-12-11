@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  api:
+    ports:
+      - 81:8080
+
+  web:
+    build:
+      dockerfile: develop.dockerfile
+    ports:
+      - 3000:3000
+  db:
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5433:5432

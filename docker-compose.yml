@@ -1,30 +1,30 @@
-version: '3'
+version: "3"
 
 services:
   api:
-    build: ./Api/
+    build: ${SRC_API_RELATIVE_PATH}
     environment:
       - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
       - ASPNETCORE_URLS=${API_URLS}
-    ports:
-      - 81:8080
+
   web:
-    build: ./Web/
+    build: ${SRC_WEB_RELATIVE_PATH}
     volumes:
-      - web-artifacts:/app
+      - web-artifacts:/app/build
     environment:
       - API_ENDPOINT=${API_ALIAS}:${API_PORT}
-    depends_on:
-      - api
-  # db:
-  #   build: ./Db/
-  nginx: 
+
+  db:
+    build: ./Db/
+
+  nginx:
     build: ./Nginx/
     ports:
       - 80:80
     volumes:
-      - web-artifacts:/app
+      - web-artifacts:/static:ro
     depends_on:
       - web
+      - api
 volumes:
-  web-artifacts: {}
+  web-artifacts:
