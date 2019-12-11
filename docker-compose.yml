@@ -3,12 +3,14 @@ version: "3"
 services:
   api:
     build: ${SRC_API_RELATIVE_PATH}
+    container_name: sc_api
     environment:
       - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
       - ASPNETCORE_URLS=${API_URLS}
 
   web:
     build: ${SRC_WEB_RELATIVE_PATH}
+    container_name: sc_web
     volumes:
       - web-artifacts:/app/build
     environment:
@@ -16,9 +18,11 @@ services:
 
   db:
     build: ./Db/
+    container_name: sc_db
 
   nginx:
     build: ./Nginx/
+    container_name: sc_nginx
     ports:
       - 80:80
     volumes:
