@@ -2,14 +2,14 @@ version: "3"
 
 services:
   api:
-    build: ${SRC_API_RELATIVE_PATH}
+    build: ${API_RELATIVE_PATH}
     container_name: sc_api
     environment:
       - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
       - ASPNETCORE_URLS=${API_URLS}
 
   web:
-    build: ${SRC_WEB_RELATIVE_PATH}
+    build: ${WEB_RELATIVE_PATH}
     container_name: sc_web
     volumes:
       - web-artifacts:/app/build
