@@ -1,4 +1,4 @@
 FROM postgres
 EXPOSE 5432
-USER postgres
-ENTRYPOINT [ "init.sh" ]
+WORKDIR /docker-entrypoint-initdb.d/
+COPY initialize.sql .
