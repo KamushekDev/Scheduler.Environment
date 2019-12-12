@@ -1,4 +1,4 @@
 FROM postgres
 EXPOSE 5432
 USER postgres
-CMD psql create database scheduler
+ENTRYPOINT [ "init.sh" ]
