@@ -11,16 +11,13 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - web-artifacts:/app
+      - ${WEB_ABSOLUTE_PATH}:/dev/app
+      - dev/app/node_modules
+    environment:
+      - NODE_ENV=development
+
   db:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
       - 5433:5432
-volumes:
-  web-artifacts:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${WEB_ABSOLUTE_PATH}
-      o: bind
