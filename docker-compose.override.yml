@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      dockerfile: develop.dockerfile
+
+  api:
+    ports:
+      - 81:8080
+
+  web:
+    build:
+      dockerfile: develop.dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ${WEB_ABSOLUTE_PATH}:/develop/app
+      - /develop/app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+
+  db:
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5433:5432

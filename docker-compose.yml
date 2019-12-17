@@ -1,14 +1,36 @@
-version: '3'
+version: "3"
 
 services:
   api:
-    build: ./Api/
+    build: ${API_RELATIVE_PATH}
+    container_name: sc_api
+    environment:
+      - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
+      - ASPNETCORE_URLS=${API_URLS}
+    depends_on:
+      - db
 
   web:
-    build: ./Web/
+    build: ${WEB_RELATIVE_PATH}
+    container_name: sc_web
+    volumes:
+      - web-artifacts:/app/build
+    environment:
+      - API_ENDPOINT=${API_ALIAS}:${API_PORT}
 
   db:
     build: ./Db/
+    container_name: sc_db
 
-  nginx: 
+  nginx:
     build: ./Nginx/
+    container_name: sc_nginx
+    ports:
+      - 80:80
+    volumes:
+      - web-artifacts:/static:ro
+    depends_on:
+      - web
+      - api
+volumes:
+  web-artifacts:
