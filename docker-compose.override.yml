@@ -11,10 +11,11 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ${WEB_ABSOLUTE_PATH}:/dev/app
-      - dev/app/node_modules
+      - ${WEB_ABSOLUTE_PATH}:/develop/app
+      - /develop/app/node_modules
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
 
   db:
     environment:
