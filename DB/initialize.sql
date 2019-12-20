@@ -6,15 +6,7 @@ login password 'Scheduler';
 
 \c scheduler
 
-create schema public;
-
-comment on schema public is 'standard public schema';
-
-alter schema public owner to postgres;
-
 create type grouptype as enum ('Main', 'Secondary');
-
-alter type grouptype owner to postgres;
 
 create table departments
 (
@@ -24,8 +16,6 @@ create table departments
 	name varchar not null,
 	description text
 );
-
-alter table departments owner to postgres;
 
 create unique index departments_id_uindex
 	on departments (id);
@@ -40,8 +30,6 @@ create table lesson_names
 			primary key,
 	name varchar not null
 );
-
-alter table lesson_names owner to postgres;
 
 create unique index lesson_names_id_uindex
 	on lesson_names (id);
@@ -65,8 +53,6 @@ create table lessons
 	description text
 );
 
-alter table lessons owner to postgres;
-
 create unique index lessons_id_uindex
 	on lessons (id);
 
@@ -82,8 +68,6 @@ create table groups
 	name varchar not null,
 	group_type grouptype default 'Main'::grouptype not null
 );
-
-alter table groups owner to postgres;
 
 create unique index groups_id_uindex
 	on groups (id);
@@ -102,8 +86,6 @@ create table students
 	phone varchar,
 	email varchar
 );
-
-alter table students owner to postgres;
 
 create unique index students_id_uindex
 	on students (id);
@@ -131,8 +113,6 @@ create table students_to_groups
 	exit_date date not null
 );
 
-alter table students_to_groups owner to postgres;
-
 create unique index students_to_groups_id_uindex
 	on students_to_groups (id);
 
@@ -152,8 +132,6 @@ create table teachers
 	email varchar
 );
 
-alter table teachers owner to postgres;
-
 create unique index teachers_id_uindex
 	on teachers (id);
 
@@ -165,8 +143,6 @@ create table classrooms
 	name varchar(10) not null,
 	description text
 );
-
-alter table classrooms owner to postgres;
 
 create unique index classrooms_id_uindex
 	on classrooms (id);
@@ -188,8 +164,6 @@ create table examinations
 	description text
 );
 
-alter table examinations owner to postgres;
-
 create unique index examinations_id_uindex
 	on examinations (id);
 
@@ -207,8 +181,6 @@ create table lesson_names_to_lessons
 		primary key (id_lesson, id_lesson_name)
 );
 
-alter table lesson_names_to_lessons owner to postgres;
-
 create table class_types
 (
 	id serial not null
@@ -216,8 +188,6 @@ create table class_types
 			primary key,
 	name varchar not null
 );
-
-alter table class_types owner to postgres;
 
 create table classes
 (
@@ -247,8 +217,6 @@ create table classes
 				on update cascade on delete restrict
 );
 
-alter table classes owner to postgres;
-
 create unique index classes_id_uindex
 	on classes (id);
 
@@ -277,8 +245,6 @@ create table tasks
 	date_done date,
 	description text
 );
-
-alter table tasks owner to postgres;
 
 create unique index tasks_id_uindex
 	on tasks (id);
