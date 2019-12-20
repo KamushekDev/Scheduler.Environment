@@ -6,6 +6,16 @@ login password 'Scheduler';
 
 \c scheduler
 
+create schema public;
+
+comment on schema public is 'standard public schema';
+
+alter schema public owner to postgres;
+
+create type grouptype as enum ('Main', 'Secondary');
+
+alter type grouptype owner to postgres;
+
 create table departments
 (
 	id serial not null
@@ -22,7 +32,6 @@ create unique index departments_id_uindex
 
 create unique index departments_name_uindex
 	on departments (name);
-
 
 create table lesson_names
 (
@@ -60,8 +69,6 @@ alter table lessons owner to postgres;
 
 create unique index lessons_id_uindex
 	on lessons (id);
-
-create type GroupType as enum ('Main', 'Secondary');
 
 create table groups
 (
@@ -164,6 +171,54 @@ alter table classrooms owner to postgres;
 create unique index classrooms_id_uindex
 	on classrooms (id);
 
+create table examinations
+(
+	id serial not null
+		constraint examinations_pk
+			primary key,
+	id_group integer not null
+		constraint examinations_groups_id_fk
+			references groups
+				on update cascade on delete restrict,
+	id_lesson integer not null
+		constraint examinations_lessons_id_fk
+			references lessons
+				on update cascade on delete restrict,
+	datetime timestamp not null,
+	description text
+);
+
+alter table examinations owner to postgres;
+
+create unique index examinations_id_uindex
+	on examinations (id);
+
+create table lesson_names_to_lessons
+(
+	id_lesson integer not null
+		constraint lesson_names_to_lessons_lessons_id_fk
+			references lessons
+				on update cascade on delete restrict,
+	id_lesson_name integer not null
+		constraint lesson_names_to_lessons_lesson_names_id_fk
+			references lesson_names
+				on update cascade on delete restrict,
+	constraint lesson_names_to_lessons_pk
+		primary key (id_lesson, id_lesson_name)
+);
+
+alter table lesson_names_to_lessons owner to postgres;
+
+create table class_types
+(
+	id serial not null
+		constraint class_types_pk
+			primary key,
+	name varchar not null
+);
+
+alter table class_types owner to postgres;
+
 create table classes
 (
 	id serial not null
@@ -185,7 +240,11 @@ create table classes
 		constraint classes_teachers_id_fk
 			references teachers
 				on update cascade on delete restrict,
-	class_time time not null
+	class_time time not null,
+	id_class_type integer not null
+		constraint classes_class_types_id_fk
+			references class_types
+				on update cascade on delete restrict
 );
 
 alter table classes owner to postgres;
@@ -224,24 +283,9 @@ alter table tasks owner to postgres;
 create unique index tasks_id_uindex
 	on tasks (id);
 
-create table examinations
-(
-	id serial not null
-		constraint examinations_pk
-			primary key,
-	id_group integer not null
-		constraint examinations_groups_id_fk
-			references groups
-				on update cascade on delete restrict,
-	id_lesson integer not null
-		constraint examinations_lessons_id_fk
-			references lessons
-				on update cascade on delete restrict,
-	datetime timestamp not null,
-	description text
-);
+create unique index class_types_id_uindex
+	on class_types (id);
 
-alter table examinations owner to postgres;
+create unique index class_types_name_uindex
+	on class_types (name);
 
-create unique index examinations_id_uindex
-	on examinations (id);
