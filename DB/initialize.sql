@@ -6,6 +6,10 @@ login password 'Scheduler';
 
 \c scheduler
 
+create schema public;
+
+comment on schema public is 'standard public schema';
+
 create type grouptype as enum ('Main', 'Secondary');
 
 create table departments
@@ -189,6 +193,12 @@ create table class_types
 	name varchar not null
 );
 
+create unique index class_types_id_uindex
+	on class_types (id);
+
+create unique index class_types_name_uindex
+	on class_types (name);
+
 create table classes
 (
 	id serial not null
@@ -249,9 +259,15 @@ create table tasks
 create unique index tasks_id_uindex
 	on tasks (id);
 
-create unique index class_types_id_uindex
-	on class_types (id);
-
-create unique index class_types_name_uindex
-	on class_types (name);
-
+create table users
+(
+	id serial not null
+		constraint users_pk
+			primary key,
+	name varchar not null,
+	surname varchar not null,
+	patronymic varchar,
+	phone varchar,
+	email varchar,
+	autorization_shit text
+);
