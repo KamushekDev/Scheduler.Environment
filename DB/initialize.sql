@@ -6,10 +6,6 @@ login password 'Scheduler';
 
 \c scheduler
 
-create schema public;
-
-comment on schema public is 'standard public schema';
-
 create type grouptype as enum ('Main', 'Secondary');
 
 create table departments
