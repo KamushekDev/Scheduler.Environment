@@ -2,21 +2,21 @@ version: "3"
 
 services:
   api:
-    build: ${API_RELATIVE_PATH}
+    build: ../Scheduler.API
     container_name: sc_api
     environment:
-      - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
-      - ASPNETCORE_URLS=${API_URLS}
+      - ASPNETCORE_HTTPS_PORT=44310
+      - ASPNETCORE_URLS=https://+:443;http://+:8080
     depends_on:
       - db
 
   web:
-    build: ${WEB_RELATIVE_PATH}
+    build: ../Scheduler.WEB
     container_name: sc_web
     volumes:
       - web-artifacts:/app/build
     environment:
-      - API_ENDPOINT=${API_ALIAS}:${API_PORT}
+      - API_ENDPOINT=api:8080
 
   db:
     build: ./Db/

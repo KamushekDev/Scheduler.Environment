@@ -1,3 +1,5 @@
 /API/*
 /Web/*
 **/*.DS_Store
+
+.env

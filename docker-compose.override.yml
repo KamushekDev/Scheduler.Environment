@@ -15,7 +15,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ${WEB_ABSOLUTE_PATH}:/develop/app
+      - ${FOLDER_ABSOLUTE_PATH}Scheduler.WEB:/develop/app
       - /develop/app/node_modules
     environment:
       - NODE_ENV=development
