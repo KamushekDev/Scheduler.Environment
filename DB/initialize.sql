@@ -8,6 +8,8 @@ login password 'Scheduler';
 
 create type grouptype as enum ('Main', 'Secondary');
 
+create type user_role as enum ('Student', 'Teacher', 'Group Monitor', 'Group Editor', 'Moderator', 'Admin');
+
 create table departments
 (
 	id serial not null
@@ -75,66 +77,6 @@ create unique index groups_id_uindex
 create unique index groups_name_uindex
 	on groups (name);
 
-create table students
-(
-	id serial not null
-		constraint students_pk
-			primary key,
-	name varchar not null,
-	surname varchar not null,
-	patronymic varchar,
-	phone varchar,
-	email varchar
-);
-
-create unique index students_id_uindex
-	on students (id);
-
-create unique index students_phone_uindex
-	on students (phone);
-
-create unique index students_email_uindex
-	on students (email);
-
-create table students_to_groups
-(
-	id serial not null
-		constraint students_to_groups_pk
-			primary key,
-	id_group integer not null
-		constraint students_to_groups_groups_id_fk
-			references groups
-				on update cascade on delete restrict,
-	id_student integer not null
-		constraint students_to_groups_students_id_fk
-			references students
-				on update cascade on delete restrict,
-	enter_date date not null,
-	exit_date date not null
-);
-
-create unique index students_to_groups_id_uindex
-	on students_to_groups (id);
-
-create table teachers
-(
-	id serial not null
-		constraint teachers_pk
-			primary key,
-	id_department integer not null
-		constraint teachers_departments_id_fk
-			references departments
-				on update cascade on delete restrict,
-	name varchar not null,
-	surname varchar not null,
-	patronymic varchar,
-	phone varchar,
-	email varchar
-);
-
-create unique index teachers_id_uindex
-	on teachers (id);
-
 create table classrooms
 (
 	id serial not null
@@ -195,6 +137,19 @@ create unique index class_types_id_uindex
 create unique index class_types_name_uindex
 	on class_types (name);
 
+create table users
+(
+	id serial not null
+		constraint users_pk
+			primary key,
+	name varchar not null,
+	surname varchar not null,
+	patronymic varchar,
+	phone varchar,
+	email varchar,
+	autorization_shit text
+);
+
 create table classes
 (
 	id serial not null
@@ -213,8 +168,8 @@ create table classes
 			references groups
 				on update cascade on delete restrict,
 	id_teacher integer not null
-		constraint classes_teachers_id_fk
-			references teachers
+		constraint classes_users_id_fk
+			references users
 				on update cascade on delete restrict,
 	class_time time not null,
 	id_class_type integer not null
@@ -255,15 +210,19 @@ create table tasks
 create unique index tasks_id_uindex
 	on tasks (id);
 
-create table users
+create table users_to_user_roles
 (
-	id serial not null
-		constraint users_pk
-			primary key,
-	name varchar not null,
-	surname varchar not null,
-	patronymic varchar,
-	phone varchar,
-	email varchar,
-	autorization_shit text
+	id_user integer not null
+		constraint users_to_user_roles_users_id_fk
+			references users
+				on update cascade on delete restrict,
+	id_group integer
+		constraint users_to_user_roles_groups_id_fk
+			references groups
+				on update cascade on delete restrict,
+	id_department integer
+		constraint users_to_user_roles_departments_id_fk
+			references departments
+				on update cascade on delete restrict,
+	role user_role not null
 );
