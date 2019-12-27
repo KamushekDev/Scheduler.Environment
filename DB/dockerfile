@@ -1,4 +1,4 @@
 FROM postgres
 EXPOSE 5432
 WORKDIR /docker-entrypoint-initdb.d/
-COPY Initialize.sql .
+COPY initialize.sql .
