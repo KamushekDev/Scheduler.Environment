@@ -306,7 +306,7 @@ INSERT INTO public.lesson_names (name) VALUES ('Безопасность Жиз�
 INSERT INTO public.lesson_names (name) VALUES ('Теория разработки программного обеспечения');
 INSERT INTO public.lesson_names (name) VALUES ('БЖД');
 INSERT INTO public.lesson_names (name) VALUES ('ТПРО');
-INSERT INTO public.lessons (id_primary_name, id_department, description) VALUES (1, 1, 'САМАЯСУКАВАЖНАЯПАРАВМИРЕ');
+INSERT INTO public.lessons (id_primary_name, id_department, description) VALUES (1, 1, 'САМАЯ СУКА ВАЖНАЯ ПАРА В МИРЕ');
 INSERT INTO public.lessons (id_primary_name, id_department, description) VALUES (2, 2, '');
 INSERT INTO public.lesson_names_to_lessons (id_lesson, id_lesson_name) VALUES (1, 1);
 INSERT INTO public.lesson_names_to_lessons (id_lesson, id_lesson_name) VALUES (1, 3);
