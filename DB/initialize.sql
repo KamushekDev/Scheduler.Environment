@@ -259,20 +259,20 @@ create table users_to_user_roles
 
 alter table users_to_user_roles owner to scheduler_user;
 
-create function get_classes_by_groups(VARIADIC needed_groups text[]) returns TABLE(start_time time without time zone, end_time time without time zone, class_day_number integer, lesson_name character varying, room character varying, teacher_name character varying, teacher_surname character varying, teacher_patronymic character varying, class_type character varying, group_name character varying)
+create function getclassesbygroups(needed_groups text[]) returns TABLE(starttime time without time zone, endtime time without time zone, classdaynumber integer, lessonname character varying, room character varying, teachername character varying, teachersurname character varying, teacherpatronymic character varying, classtype character varying, groupname character varying)
 	language plpgsql
 as $$
 begin
-    return QUERY select class_time_begin  as start_time,
-                   class_time_end    as end_time,
-                   day_number as class_day_number,
-                   lesson_names.name as lesson_name,
+    return QUERY select class_time_begin  as startTime,
+                   class_time_end    as endTime,
+                   day_number as classDayNumber,
+                   lesson_names.name as lessonName,
                    rooms.name        as room,
-                   u.name            as teacher_name,
-                   u.surname         as teacher_surname,
-                   u.patronymic      as teacher_patronymic,
-                   ct.name           as class_type,
-                   g.name            as group_name
+                   u.name            as teacherName,
+                   u.surname         as teacherSurname,
+                   u.patronymic      as teacherPatronymic,
+                   ct.name           as classType,
+                   g.name            as groupName
             from classes cl
                      join lessons l on cl.id_lesson = l.id
                      join lesson_names on l.id_primary_name = lesson_names.id
@@ -284,7 +284,9 @@ begin
 end;
 $$;
 
-alter function get_classes_by_groups(text[]) owner to scheduler_user;
+alter function getclassesbygroups(text[]) owner to scheduler_user;
+
+
 
 
 
