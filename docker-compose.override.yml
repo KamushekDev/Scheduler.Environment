@@ -16,7 +16,7 @@ services:
       - 3000:3000
     volumes:
       - ${FOLDER_ABSOLUTE_PATH}Scheduler.WEB:/develop/app
-      - /develop/app/node_modules
+      # - /develop/app/node_modules
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
