@@ -50,8 +50,7 @@ create table lessons
 	name varchar(40) not null
 		constraint lessons_pk
 			primary key,
-	description text,
-	access access_modifier default 'Public'::access_modifier not null
+	description text
 );
 
 alter table lessons owner to scheduler_user;
@@ -64,8 +63,7 @@ create table rooms
 	name varchar(30) not null
 		constraint rooms_pk
 			primary key,
-	description text,
-	access access_modifier default 'Public'::access_modifier not null
+	description text
 );
 
 alter table rooms owner to scheduler_user;
@@ -143,8 +141,7 @@ create table class_types
 	name varchar(30) not null
 		constraint class_types_pk
 			primary key,
-	description text,
-	access access_modifier default 'Public'::access_modifier not null
+	description text
 );
 
 alter table class_types owner to scheduler_user;
