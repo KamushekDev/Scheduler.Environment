@@ -1,0 +1,2 @@
+INSERT INTO public.tasks (end_class_id, date_begin, date_end, name, description, access) VALUES (2, '2020-01-01', '2020-01-31', 'Лабораторная работа №2', 'ВЕКТОРНУЮ ДИАГРАММУ МНЕ СЮДА ЗАПИЛИЛ, ЖИВО', 'Inherited');
+INSERT INTO public.tasks (end_class_id, date_begin, date_end, name, description, access) VALUES (1, '2020-01-01', '2020-01-23', 'Забег 100м', 'Ну это габелла', 'Inherited');

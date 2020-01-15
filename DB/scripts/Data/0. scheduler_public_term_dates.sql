@@ -1,0 +1,1 @@
+INSERT INTO public.term_dates (start_date, end_date) VALUES ('2019-12-31', '2020-02-04');

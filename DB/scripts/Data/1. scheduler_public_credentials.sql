@@ -1,0 +1,1 @@
+INSERT INTO public.credentials (user_id, provider, access_token, date_expired) VALUES (1, 'vkontakte', 'nytytrilbiltokenatvichau', '2020-01-15 09:22:14.000000');

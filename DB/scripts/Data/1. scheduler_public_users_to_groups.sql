@@ -1,0 +1,3 @@
+INSERT INTO public.users_to_groups (user_id, group_id, role, date_entry, date_exit) VALUES (1, 1, 'Headman', '2020-01-01 09:32:14.000000', null);
+INSERT INTO public.users_to_groups (user_id, group_id, role, date_entry, date_exit) VALUES (1, 3, 'Student', '2020-01-01 09:32:14.000000', null);
+INSERT INTO public.users_to_groups (user_id, group_id, role, date_entry, date_exit) VALUES (1, 2, 'Headman', '2020-01-01 09:32:14.000000', null);
