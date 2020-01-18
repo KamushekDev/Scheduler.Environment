@@ -161,7 +161,7 @@ create table terms
 
 alter table terms owner to scheduler_user;
 
-create unique index terms_id_uindex
+create unique index term_id_uindex
 	on terms (id);
 
 create unique index terms_start_date_end_date_uindex
@@ -190,8 +190,8 @@ create table classes
 		constraint classes_class_types_name_fk
 			references class_types
 				on update cascade on delete restrict,
-	terms_id integer not null
-		constraint classes_terms_id_fk
+	term_id integer not null
+		constraint classes_term_id_fk
 			references terms
 				on update cascade on delete restrict,
 	teacher_id integer
