@@ -149,22 +149,25 @@ alter table class_types owner to scheduler_user;
 create unique index class_types_name_uindex
 	on class_types (name);
 
-create table term_dates
+create table terms
 (
 	id serial not null
 		constraint term_dates_pk
 			primary key,
 	start_date date not null,
-	end_date date not null
+	end_date date not null,
+	description text
 );
 
-alter table term_dates owner to scheduler_user;
+alter table terms owner to scheduler_user;
 
 create unique index term_dates_id_uindex
-	on term_dates (id);
+	on terms (id);
 
 create unique index term_dates_start_date_end_date_uindex
-	on term_dates (start_date, end_date);
+	on terms (start_date, end_date);
+
+
 
 create table classes
 (
