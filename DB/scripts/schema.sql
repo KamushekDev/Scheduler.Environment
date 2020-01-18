@@ -167,8 +167,6 @@ create unique index terms_id_uindex
 create unique index terms_start_date_end_date_uindex
 	on terms (start_date, end_date);
 
-
-
 create table classes
 (
 	lesson_name varchar(40) not null
@@ -199,7 +197,8 @@ create table classes
 	teacher_id integer
 		constraint classes_users_id_fk
 			references users
-				on update cascade on delete restrict
+				on update cascade on delete restrict,
+	duration integer default 95 not null
 );
 
 alter table classes owner to scheduler_user;
