@@ -1,0 +1,4 @@
+INSERT INTO public.classes (lesson_name, room_name, group_id, time, access, id, class_type_name, terms_id, teacher_id) VALUES ('Вечерняя прогулка', 'Парк у дома', 2, '20:00:00', 'Group', 3, 'Спортивная', 1, null);
+INSERT INTO public.classes (lesson_name, room_name, group_id, time, access, id, class_type_name, terms_id, teacher_id) VALUES ('Безопасность жизнидеятельности', 'УИТ3', 1, '13:45:00', 'Inherited', 2, 'Практика', 1, null);
+INSERT INTO public.classes (lesson_name, room_name, group_id, time, access, id, class_type_name, terms_id, teacher_id) VALUES ('Военноморская подготовка', '1158', 3, '08:00:00', 'Inherited', 4, 'Общая', 1, null);
+INSERT INTO public.classes (lesson_name, room_name, group_id, time, access, id, class_type_name, terms_id, teacher_id) VALUES ('Моделирование систем', '1158', 1, '11:40:00', 'Inherited', 1, 'Лекция', 1, null);
