@@ -10,6 +10,10 @@ create type user_role as enum ('Student', 'Editor', 'Moderator', 'Headman');
 
 alter type user_role owner to scheduler_user;
 
+create type week_type as enum ('Even', 'Odd', 'Both');
+
+alter type week_type owner to postgres;
+
 create table users
 (
 	id serial not null
@@ -161,7 +165,7 @@ create table terms
 
 alter table terms owner to scheduler_user;
 
-create unique index term_id_uindex
+create unique index terms_id_uindex
 	on terms (id);
 
 create unique index terms_start_date_end_date_uindex
@@ -191,14 +195,16 @@ create table classes
 			references class_types
 				on update cascade on delete restrict,
 	term_id integer not null
-		constraint classes_term_id_fk
+		constraint classes_terms_id_fk
 			references terms
 				on update cascade on delete restrict,
 	teacher_id integer
 		constraint classes_users_id_fk
 			references users
 				on update cascade on delete restrict,
-	duration integer default 95 not null
+	duration integer default 95 not null,
+	week_type week_type default 'Both'::week_type not null,
+	day_number integer not null
 );
 
 alter table classes owner to scheduler_user;
