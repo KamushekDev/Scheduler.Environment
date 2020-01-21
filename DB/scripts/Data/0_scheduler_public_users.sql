@@ -1,1 +1,0 @@
-INSERT INTO public.users (name, surname, patronymic, phone, email) VALUES ('Ильин', 'Кирилл', 'Сергеевич', null, 'kamushek.stone@gmail.com');

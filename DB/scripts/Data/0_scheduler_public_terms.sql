@@ -1,1 +1,1 @@
-INSERT INTO public.terms (start_date, end_date, description) VALUES ('2019-12-31', '2020-02-04', null);
+INSERT INTO public.terms (start_date, end_date, description) VALUES ('2019-12-31', '2020-12-12', 'Тестовый период');
