@@ -85,7 +85,7 @@ create table groups
 		constraint groups_pk
 			primary key,
 	name varchar(30) not null,
-	access access_modifier default 'Group'::access_modifier not null,
+	access access_modifier default 'Public'::access_modifier not null,
 	invite_tag varchar,
 	description text
 );
