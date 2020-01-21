@@ -43,15 +43,19 @@ create table credentials
 	provider varchar(20) not null,
 	access_token varchar not null,
 	date_expired timestamp not null,
+	provider_user_id integer not null,
 	constraint credentials_pk
 		primary key (user_id, provider)
 );
 
 alter table credentials owner to scheduler_user;
 
+create unique index credentials_provider_provider_user_id_uindex
+	on credentials (provider, provider_user_id);
+
 create table lessons
 (
-	name varchar(40) not null
+	name varchar not null
 		constraint lessons_pk
 			primary key,
 	description text
@@ -173,7 +177,7 @@ create unique index terms_start_date_end_date_uindex
 
 create table classes
 (
-	lesson_name varchar(40) not null
+	lesson_name varchar not null
 		constraint classes_lessons_name_fk
 			references lessons
 				on update cascade on delete restrict,
